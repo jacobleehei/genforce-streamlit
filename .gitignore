@@ -30,3 +30,15 @@ gan/interfacegan/InterFaceGAN/models/__pycache__/pggan_generator.cpython-36.pyc
 gan/interfacegan/InterFaceGAN/models/__pycache__/pggan_generator_model.cpython-36.pyc
 gan/interfacegan/InterFaceGAN/models/__pycache__/stylegan_generator.cpython-36.pyc
 gan/interfacegan/InterFaceGAN/models/__pycache__/stylegan_generator_model.cpython-36.pyc
+*.pyc
+gan/interfacegan/face_align/__pycache__/align_images.cpython-36.pyc
+gan/interfacegan/face_align/ffhq_dataset/__pycache__/__init__.cpython-36.pyc
+gan/interfacegan/face_align/ffhq_dataset/__pycache__/face_alignment.cpython-36.pyc
+gan/interfacegan/face_align/ffhq_dataset/__pycache__/landmarks_detector.cpython-36.pyc
+gan/interfacegan/InterFaceGAN/models/__pycache__/__init__.cpython-36.pyc
+gan/interfacegan/InterFaceGAN/models/__pycache__/base_generator.cpython-36.pyc
+gan/interfacegan/InterFaceGAN/models/__pycache__/model_settings.cpython-36.pyc
+gan/interfacegan/InterFaceGAN/models/__pycache__/pggan_generator.cpython-36.pyc
+gan/interfacegan/InterFaceGAN/models/__pycache__/pggan_generator_model.cpython-36.pyc
+gan/interfacegan/InterFaceGAN/models/__pycache__/stylegan_generator.cpython-36.pyc
+gan/interfacegan/InterFaceGAN/models/__pycache__/stylegan_generator_model.cpython-36.pyc
