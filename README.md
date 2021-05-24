@@ -9,7 +9,7 @@ This project highlights three powerful Generative model based methods [InterFace
 ![In-use Animation](https://github.com/jasonleehei/GenForce-Streamlit/blob/main/demo-itf.gif?raw=true "In-use Animation")
 
 ## How to run this app
-The demo requires Python 3.6 or 3.7 
+The app requires Python 3.6 or 3.7 
 **It is suggested that creating a new virtual environment**, then running:
 
 ```
