@@ -55,10 +55,10 @@ def writePageNode(operation):
         ## Manipulation results
         Identifying such a set of manipulatable latent variation factors facilitates semantic scene manipulation.
         """, unsafe_allow_html=True) 
-        
-        open_gif(f'img/web/hipage/result.gif')
-        st.subheader('Check more results of various scenes in the following video.')
-        st.video('https://youtu.be/X5yWu2Jwjpg')
+        with st.spinner('Loading...☕'):
+          open_gif(f'img/web/hipage/result.gif')
+          st.subheader('Check more results of various scenes in the following video.')
+          st.video('https://youtu.be/X5yWu2Jwjpg')
 
     if operation == '✨ Do the magic of hierarchy images': editImage()
 

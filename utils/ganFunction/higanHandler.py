@@ -4,7 +4,7 @@ import numpy as np
 from tqdm import tqdm
 
 if sys.platform == 'darwin':
-    sys.path.append('ganFunction')
+    sys.path.append('utils/ganFunction')
     import idinvertHandler as idv
 else:
     import utils.ganFunction.idinvertHandler as idv

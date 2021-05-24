@@ -66,14 +66,15 @@ def writePageNode(operation):
 
         ## In-Domain GAN semantic diffusion:
         """, unsafe_allow_html=True) 
-        
-        web.open_gif('img/web/idvpage/diffusion.gif')
+        with st.spinner('Loading...☕'):
+            web.open_gif('img/web/idvpage/diffusion.gif')
 
-        st.subheader('Image editing results:')
-        web.open_gif('img/web/idvpage/edit.gif')
+            st.subheader('Image editing results:')
+            web.open_gif('img/web/idvpage/edit.gif')
 
-        st.subheader('Image editing results:')
-        st.video('https://youtu.be/3v6NHrhuyFY')
+            st.subheader('Image editing results:')
+            st.video('https://youtu.be/3v6NHrhuyFY')
+            
     if operation == '✨ Semantic Diffusion': Semantic_Diffusion()
     if operation == '✨ Manipulation'      : Manipulation()
     if operation == '✨ Interpolation'     : Interpolation()
