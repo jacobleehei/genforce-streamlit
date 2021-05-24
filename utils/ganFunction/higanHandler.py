@@ -7,7 +7,7 @@ if sys.platform == 'darwin':
     sys.path.append('ganFunction')
     import idinvertHandler as idv
 else:
-    import ganFunction.idinvertHandler as idv
+    import utils.ganFunction.idinvertHandler as idv
 
 from gan.higan.models.helper import build_generator
 from gan.higan.utils.logger import setup_logger

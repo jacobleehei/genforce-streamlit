@@ -9,8 +9,9 @@ else:
 
 def write():
         # Download all data files if they aren't already in the working directory.
-        for filename in fileDetail.EXTERNAL_DEPENDENCIES.keys():
-                webFunction.download_file(filename)
+        with st.spinner('Just a sec, come back later...☕'):
+                for filename in fileDetail.EXTERNAL_DEPENDENCIES.keys():
+                        webFunction.download_file(filename)
 
         icon_path = "img/web/icon.gif" 
         webFunction.open_gif(icon_path, 400)

@@ -1,0 +1,13 @@
+streamlit==0.81.1
+IPython==7.19.0
+Pillow==8.1.0
+torch==1.8.0
+numpy==1.19.2
+Keras==2.4.3
+requests==2.25.1
+cmake==3.18.4.post1
+dlib==19.21.1
+scipy==1.6.2
+tqdm==4.59.0
+zipp==3.4.1
+streamlit_cropper==0.1.3

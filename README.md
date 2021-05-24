@@ -1,2 +1,14 @@
 # GenForce-Streamlit
- 
+This project highlights three powerful Generative model based Method [InterFace GAN](https://genforce.github.io/interfacegan/), [HiGAN](https://genforce.github.io/higan/) and [In-Domain GAN](https://genforce.github.io/idinvert/) for tuning the output image's characteristics, inverting real images and randomly generating faces and hierarchy images. For more information, check out the [Research Initiative on Generative Modeling](https://genforce.github.io/). 
+
+
+## How to run this app
+The demo requires Python 3.6 or 3.7 
+**It is suggested that creating a new virtual environment**, then running:
+
+```
+git clone https://github.com/jasonleehei/GenForce-Streamlit.git
+cd GenForce-Streamlit
+pip install -r requirements.txt
+streamlit run app.py
+```
