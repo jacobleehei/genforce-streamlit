@@ -1,0 +1,5 @@
+.DS_Store 
+._.DS_Store
+.___pycache__
+._face_align
+._latent_encoder
