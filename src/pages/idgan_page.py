@@ -240,7 +240,7 @@ def uploadImg(column, str):
 
     @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
     def align(image):
-        a_path = 'temp.png'
+        a_path = 'img/indomain_output/temp.png'
         Image.open(image).save(a_path, 'PNG')
         with st.spinner('Aligning image...⏳'):
             return idv.align_face(a_path)
