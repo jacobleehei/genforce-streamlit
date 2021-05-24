@@ -1,14 +1,16 @@
 import streamlit as st
 from streamlit_cropper import st_cropper
 from zipfile import ZipFile
-import io
-import base64
-import uuid
-import re
-import urllib 
-import os
-from utils.fileDetail import EXTERNAL_DEPENDENCIES
+import io, sys, base64, uuid, re, urllib, os, tkinter
 from PIL import Image
+
+if sys.platform == 'darwin':
+    sys.path.append('utils')
+    from fileDetail import EXTERNAL_DEPENDENCIES
+else:
+    from utils.fileDetail import EXTERNAL_DEPENDENCIES
+
+
 
 def write_page(page):
 	"""Writes the specified page/module
@@ -105,11 +107,11 @@ def image_cropping(input_image, color='#F63366', ratio=(1,1)):
     return input_image
 
 
-def open_gif(path, display_size=256, col=None):
+def open_gif(path, display_size=tkinter.Tk().winfo_screenwidth()/1.6, col=None):
     '''
     This function will show gif in streamlit.
     path: the path of gif
-    display_size: the size to be display (default: 256)
+    display_size: the size to be display (default: screen width/1.6)
     col: if you are using streamlit beta_column, pass through this parameter
     '''
 
@@ -132,7 +134,9 @@ def open_gif(path, display_size=256, col=None):
 
 def download_file(file):
     # Don't download the file twice. (If possible, verify the download using the file length.)
-    if os.path.exists(EXTERNAL_DEPENDENCIES[file]["path"]+file): return
+    if os.path.exists(EXTERNAL_DEPENDENCIES[file]["path"]+file): 
+        if os.path.getsize(EXTERNAL_DEPENDENCIES[file]["path"]+file)+1000 > EXTERNAL_DEPENDENCIES[file]["size"]:
+            return
     
     #st.write(EXTERNAL_DEPENDENCIES[file]["path"]+file)
     

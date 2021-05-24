@@ -1,16 +1,15 @@
 import streamlit as st
 from PIL import Image
 import numpy as np
-import cv2
-import os
-import time
-import base64
-import io
-import torch
-from utils import webFunction as web
-from gan.idinvert.utils.inverter import StyleGANInverter
+import cv2, os, time, base64, io, torch, sys
 
-import utils.ganFunction.idinvertHandler as idv
+if sys.platform == 'darwin':
+    sys.path.append('utils')
+    import webFunction as web
+    import ganFunction.idinvertHandler as idv
+else:
+    from utils import webFunction as web
+    import utils.ganFunction.idinvertHandler as idv
 
 
 
@@ -68,10 +67,10 @@ def writePageNode(operation):
         ## In-Domain GAN semantic diffusion:
         """, unsafe_allow_html=True) 
         
-        web.open_gif('img/web/idvpage/diffusion.gif', display_size=1025)
+        web.open_gif('img/web/idvpage/diffusion.gif')
 
         st.subheader('Image editing results:')
-        web.open_gif('img/web/idvpage/edit.gif', display_size=1025)
+        web.open_gif('img/web/idvpage/edit.gif')
 
         st.subheader('Image editing results:')
         st.video('https://youtu.be/3v6NHrhuyFY')

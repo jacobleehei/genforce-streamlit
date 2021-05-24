@@ -1,10 +1,14 @@
 import streamlit as st
-import cv2
-import os
+import cv2, os, sys
 from PIL import Image
 
-import utils.ganFunction.higanHandler as higan
-from utils.webFunction import download_button, open_gif
+if sys.platform == 'darwin':
+     sys.path.append('utils')
+     import ganFunction.higanHandler as higan
+     from webFunction import download_button, open_gif
+else:
+     import utils.ganFunction.higanHandler as higan
+     from utils.webFunction import download_button, open_gif
 
 hiTool = higan.higan_webOject()
 
@@ -52,7 +56,7 @@ def writePageNode(operation):
         Identifying such a set of manipulatable latent variation factors facilitates semantic scene manipulation.
         """, unsafe_allow_html=True) 
         
-        open_gif(f'img/web/hipage/result.gif', 1025)
+        open_gif(f'img/web/hipage/result.gif')
         st.subheader('Check more results of various scenes in the following video.')
         st.video('https://youtu.be/X5yWu2Jwjpg')
 

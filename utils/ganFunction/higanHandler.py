@@ -1,16 +1,13 @@
-import io
-import IPython.display
-import cv2
-import PIL.Image
-import os
-import gc
+import streamlit as st
+import io, IPython.display, cv2, PIL.Image, os, gc, torch, time, sys
 import numpy as np
 from tqdm import tqdm
-import torch
-import os
-import streamlit as st
-import time
-import utils.ganFunction.idinvertHandler as idv
+
+if sys.platform == 'darwin':
+    sys.path.append('ganFunction')
+    import idinvertHandler as idv
+else:
+    import ganFunction.idinvertHandler as idv
 
 from gan.higan.models.helper import build_generator
 from gan.higan.utils.logger import setup_logger

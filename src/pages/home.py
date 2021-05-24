@@ -1,6 +1,11 @@
 import streamlit as st
-import os
-from utils import webFunction, fileDetail
+import os, sys
+
+if sys.platform == 'darwin':
+        sys.path.append('utils')
+        import webFunction, fileDetail
+else:
+        from utils import webFunction, fileDetail
 
 def write():
         # Download all data files if they aren't already in the working directory.

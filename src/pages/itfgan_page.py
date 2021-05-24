@@ -1,14 +1,18 @@
+import streamlit as st
 from tkinter import filedialog
 from PIL import Image
-import streamlit as st
-import os
+import os, time, io, sys
 import numpy as np
-import time
-import io
 
-import utils.ganFunction.interfaceganHandler as itf
-from utils.webFunction import image_cropping, open_gif
-from gan.interfacegan.face_align.align_images import align_image
+if sys.platform == 'darwin':
+    sys.path.append('utils')
+    import ganFunction.interfaceganHandler as itf
+    from webFunction import image_cropping, open_gif
+    from gan.interfacegan.face_align.align_images import align_image
+else:
+    import utils.ganFunction.interfaceganHandler as itf
+    from utils.webFunction import image_cropping, open_gif
+    from gan.interfacegan.face_align.align_images import align_image
 
 itfTool = itf.itfgan_webObject()
 
@@ -47,7 +51,7 @@ def writePageNode(operation):
         ## Example: Manipulate the attributes with PGGAN
         """, unsafe_allow_html=True) 
 
-        open_gif(f'img/web/itfpage/example.gif', 1025)
+        open_gif(f'img/web/itfpage/example.gif')
         
         st.markdown('<br>', unsafe_allow_html=True)
         st.subheader('🎈Check more results in the following video.')

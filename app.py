@@ -1,4 +1,5 @@
 import streamlit as st
+import sys
 
 st.set_page_config(
         page_title="GenForce",
@@ -7,7 +8,11 @@ st.set_page_config(
         initial_sidebar_state="expanded",
 )
 
-from utils.webFunction import write_page
+if sys.platform == 'darwin':
+    sys.path.append('utils')
+    from webFunction import write_page
+else:
+    from utils.webFunction import write_page
 
 import src.pages.home
 import src.pages.idgan_page
