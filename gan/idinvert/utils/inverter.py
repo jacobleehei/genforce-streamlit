@@ -214,7 +214,7 @@ class StyleGANInverter(object):
       optimizer.zero_grad()
       torch.no_grad()
 
-      loss.backward()
+      # loss.backward()
       optimizer.step()
 
       if num_viz > 0 and step % (self.iteration // num_viz) == 0:

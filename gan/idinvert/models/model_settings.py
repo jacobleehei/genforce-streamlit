@@ -38,6 +38,7 @@ STYLEGAN_RANDOMIZE_NOISE = False
 if torch.cuda.is_available(): USE_CUDA = True
 else: USE_CUDA = False
 
+
 MAX_IMAGES_ON_DEVICE = 1
 MAX_IMAGES_ON_RAM = 1
 

@@ -93,7 +93,7 @@ class indinvert_webObject:
       save_path = 'img/indomain_output/result/temp.png'
       cv2.imwrite(save_path,cropped_img)
       result_img = Image.open(save_path)
-      os.remove(save_path)
+      # os.remove(save_path)
       return result_img
 
 

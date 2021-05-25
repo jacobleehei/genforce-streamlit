@@ -8,8 +8,14 @@ This project highlights three powerful Generative model based methods [InterFace
 
 ![In-use Animation](https://github.com/jasonleehei/GenForce-Streamlit/blob/main/demo-itf.gif?raw=true "In-use Animation")
 
+If you want to see the full demo of this app, check it out the there:
+
+https://www.youtube.com/watch?v=hymLjwM6jEM&ab_channel=CLOEBE
+
+
+
 ## How to run this app
-The app requires Python 3.6 or 3.7 
+The app requires Python 3.6 or 3.7. 
 **It is suggested that creating a new virtual environment**, then running:
 
 ```
@@ -18,3 +24,25 @@ cd GenForce-Streamlit
 pip install -r requirements.txt
 streamlit run app.py
 ```
+
+## What this app can do?
+
+For InterFaceGAN:
+| Function      | 	Supported model
+| ------------- |:-------------:|
+| Manipulation of real image     | stylegan_ffhq |
+| Manipulation of random sampling     | 	stylegan_ffhq, stylegan_celebahq, pggan_celebahq     |
+
+For HiGAN:
+| Function      | 	Supported model
+| ------------- |:-------------:|
+| Manipulation of random sampling     | stylegan_bedroom, stylegan_livingroom, stylegan2_church,
+|| stylegan_churchoutdoor, stylegan_tower, stylegan_kitchen,
+|| stylegan_bridge |
+
+For In-DomainGAN:
+| Function      | 	Supported model
+| ------------- |:-------------:|
+| Semantic diffusion of real images     | styleganinv_ffhq256, styleganinv_tower256, styleganinv_bedroom256   |
+| Interpolation of real images     | 	styleganinv_ffhq256, styleganinv_tower256, styleganinv_bedroom256       |
+| Manipulation of real image | styleganinv_ffhq256, styleganinv_tower256, styleganinv_bedroom256   |
