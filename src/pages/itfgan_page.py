@@ -50,12 +50,11 @@ def writePageNode(operation):
         
         ## Example: Manipulate the attributes with PGGAN
         """, unsafe_allow_html=True) 
-
-        open_gif(f'img/web/itfpage/example.gif')
-        
-        st.markdown('<br>', unsafe_allow_html=True)
-        st.subheader('🎈Check more results in the following video.')
-        st.video('https://youtu.be/uoftpl3Bj6w')
+        with st.spinner('Loading...☕'):
+            open_gif(f'img/web/itfpage/example.gif')
+            st.markdown('<br>', unsafe_allow_html=True)
+            st.subheader('🎈Check more results in the following video.')
+            st.video('https://youtu.be/uoftpl3Bj6w')
 
         # gif = ['pose', 'age', 'gender', 'expression', 'eyeglasses', 'artifact']
         # for i, col in enumerate(st.beta_columns(6)) :

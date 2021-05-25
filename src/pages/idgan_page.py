@@ -66,14 +66,15 @@ def writePageNode(operation):
 
         ## In-Domain GAN semantic diffusion:
         """, unsafe_allow_html=True) 
-        
-        web.open_gif('img/web/idvpage/diffusion.gif')
+        with st.spinner('Loading...☕'):
+            web.open_gif('img/web/idvpage/diffusion.gif')
 
-        st.subheader('Image editing results:')
-        web.open_gif('img/web/idvpage/edit.gif')
+            st.subheader('Image editing results:')
+            web.open_gif('img/web/idvpage/edit.gif')
 
-        st.subheader('Image editing results:')
-        st.video('https://youtu.be/3v6NHrhuyFY')
+            st.subheader('Image editing results:')
+            st.video('https://youtu.be/3v6NHrhuyFY')
+            
     if operation == '✨ Semantic Diffusion': Semantic_Diffusion()
     if operation == '✨ Manipulation'      : Manipulation()
     if operation == '✨ Interpolation'     : Interpolation()
@@ -240,7 +241,7 @@ def uploadImg(column, str):
 
     @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
     def align(image):
-        a_path = 'temp.png'
+        a_path = 'img/indomain_output/temp.png'
         Image.open(image).save(a_path, 'PNG')
         with st.spinner('Aligning image...⏳'):
             return idv.align_face(a_path)
