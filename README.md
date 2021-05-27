@@ -10,7 +10,7 @@ This project highlights three powerful Generative model based methods [InterFace
 
 If you want to see the full demo of this app, check it out the there:
 
-https://www.youtube.com/watch?v=hymLjwM6jEM&ab_channel=CLOEBE
+https://www.youtube.com/watch?v=bbS5gHZubzM&ab_channel=CLOEBE
 
 
 

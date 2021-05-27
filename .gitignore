@@ -49,3 +49,4 @@ src/pages/__pycache__/home.cpython-38.pyc
 src/pages/__pycache__/idgan_page.cpython-38.pyc
 src/pages/__pycache__/itfgan_page.cpython-38.pyc
 utils/ganFunction/__pycache__/higanHandler.cpython-38.pyc
+gan/interfacegan/face_align/__pycache__/align_images.cpython-38.pyc
