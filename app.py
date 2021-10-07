@@ -10,7 +10,7 @@ st.set_page_config(
 
 if sys.platform == 'darwin':
     sys.path.append('utils')
-    from webFunction import write_page
+    from webFunction import write_page  
 else:
     from utils.webFunction import write_page
 
@@ -18,7 +18,6 @@ import src.pages.home
 import src.pages.idgan_page
 import src.pages.higan_page
 import src.pages.itfgan_page
-
 
 PAGES = {
     'Home': src.pages.home,
