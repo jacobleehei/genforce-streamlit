@@ -5,7 +5,6 @@ from PIL import Image
 import io
 sys.path.append('utils')
 import webFunction as web
-from keras.utils import get_file
 from gan.interfacegan.face_align.ffhq_dataset.face_alignment import image_align
 from gan.interfacegan.face_align.ffhq_dataset.landmarks_detector import LandmarksDetector
 

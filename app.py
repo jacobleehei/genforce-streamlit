@@ -32,7 +32,7 @@ def main():
     with st.sidebar:
         # update message
         st.info("""
-            ⭐ **Update**: Added InterFaceGAN, In-DomainGAN and HiGAN. Enjoy!
+            ⭐ **Update**: Fix import bug.
             """
             )
 
