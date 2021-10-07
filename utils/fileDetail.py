@@ -1,9 +1,9 @@
-#This file is for save the files' detail which will be downlaod in the first time
+# This file is for save the files' detail which will be downlaod in the first time
 
 EXTERNAL_DEPENDENCIES = {
 
     # InterFaceGAN
-    "pggan_celebahq.pth" : {
+    "pggan_celebahq.pth": {
         "path": "gan/interfacegan/InterFaceGAN/models/pretrain/",
         "url": "https://www.dropbox.com/s/t74z87pk3cf8ny7/pggan_celebahq.pth?dl=1",
         "size": 90167
@@ -61,8 +61,8 @@ EXTERNAL_DEPENDENCIES = {
         "size": 57483
     },
 
-    # higan 
-    "stylegan_apartment256_generator.pkl" : {
+    # higan
+    "stylegan_apartment256_generator.pkl": {
         "path": "gan/higan/models/pretrain/pytorch/",
         "url": "https://www.dropbox.com/s/j0uob3nhjxk00el/stylegan_apartment256_generator.pth?dl=1",
         "size": 102705
@@ -78,7 +78,7 @@ EXTERNAL_DEPENDENCIES = {
         "size": 102705
     },
 
-    "stylegan_churchoutdoor256_generator.pth" : {
+    "stylegan_churchoutdoor256_generator.pth": {
         "path": "gan/higan/models/pretrain/pytorch/",
         "url": "https://www.dropbox.com/s/dun5giw5ia2o1ol/stylegan_churchoutdoor256_generator.pth?dl=1",
         "size": 102705
@@ -94,7 +94,7 @@ EXTERNAL_DEPENDENCIES = {
         "size": 102705
     },
 
-    "stylegan_livingroom256_generator.pth" : {
+    "stylegan_livingroom256_generator.pth": {
         "path": "gan/higan/models/pretrain/pytorch/",
         "url": "https://www.dropbox.com/s/nzx4kxctirge2wp/stylegan_livingroom256_generator.pth?dl=1",
         "size": 102705

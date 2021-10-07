@@ -1,7 +1,14 @@
 import streamlit as st
 from streamlit_cropper import st_cropper
 from zipfile import ZipFile
-import io, sys, base64, uuid, re, urllib, os, tkinter
+import io
+import sys
+import base64
+import uuid
+import re
+import urllib
+import os
+import tkinter
 from PIL import Image
 
 if sys.platform == 'darwin':
@@ -11,15 +18,14 @@ else:
     from utils.fileDetail import EXTERNAL_DEPENDENCIES
 
 
-
 def write_page(page):
-	"""Writes the specified page/module
-	To take advantage of this function, a multipage app should be structured into sub-files with a `def write()` function
-	Arguments:
-		page {module} -- A module with a "def write():" function
-	"""
+    """Writes the specified page/module
+    To take advantage of this function, a multipage app should be structured into sub-files with a `def write()` function
+    Arguments:
+            page {module} -- A module with a "def write():" function
+    """
 
-	page.write()
+    page.write()
 
 
 def download_button(input_file, button_text):
@@ -36,14 +42,14 @@ def download_button(input_file, button_text):
     button_text (str): Text to display on download button (e.g. 'click here to download file')
     Returns:
     """
-    output_file=Image.fromarray(input_file)
+    output_file = Image.fromarray(input_file)
 
-    buffered=io.BytesIO()
+    buffered = io.BytesIO()
     output_file.save(buffered, format="PNG")
-    img_str=base64.b64encode(buffered.getvalue()).decode()
+    img_str = base64.b64encode(buffered.getvalue()).decode()
 
-    button_uuid=str(uuid.uuid4()).replace("-", "")
-    button_id=re.sub("\d+", "", button_uuid)
+    button_uuid = str(uuid.uuid4()).replace("-", "")
+    button_id = re.sub("\d+", "", button_uuid)
 
     custom_css = f""" 
         <style>
@@ -73,9 +79,9 @@ def download_button(input_file, button_text):
                 }}
         </style> """
 
-    dl_link=(
-          custom_css
-          + f'<a download="image.png" id="{button_id}" href="data:file/png;base64,{img_str}">{button_text}</a><br><br>'
+    dl_link = (
+        custom_css
+        + f'<a download="image.png" id="{button_id}" href="data:file/png;base64,{img_str}">{button_text}</a><br><br>'
     )
 
     st.markdown(dl_link, unsafe_allow_html=True)
@@ -85,16 +91,18 @@ def image_to_buffer(input_image):
     '''
     This function will return the buffer for the input image.
     '''
-    
-    try: input_image = Image.open(input_image)
-    except: print('file cant open by PIL')
 
-    buffered=io.BytesIO()
+    try:
+        input_image = Image.open(input_image)
+    except:
+        print('file cant open by PIL')
+
+    buffered = io.BytesIO()
     input_image.save(buffered, format='PNG')
     return buffered
 
 
-def image_cropping(input_image, color='#F63366', ratio=(1,1)):
+def image_cropping(input_image, color='#F63366', ratio=(1, 1)):
     '''
     This function will show streamlit cropper and result the cropped image
     input_image: the image to be cropped
@@ -102,8 +110,9 @@ def image_cropping(input_image, color='#F63366', ratio=(1,1)):
     ratio: the cropped image ratio (default: (1,1))
     '''
     input_image = Image.open(input_image)
-    input_image = st_cropper(input_image, realtime_update=True, box_color=color, aspect_ratio=ratio)
-    input_image.thumbnail((300,300))
+    input_image = st_cropper(
+        input_image, realtime_update=True, box_color=color, aspect_ratio=ratio)
+    input_image.thumbnail((300, 300))
     return input_image
 
 
@@ -122,24 +131,22 @@ def open_gif(path, display_size=tkinter.Tk().winfo_screenwidth()/1.6, col=None):
 
     if col is None:
         st.markdown(
-        f'<img src="data:image/gif;base64,{data_url}" alt="gif" width={display_size}>',
-        unsafe_allow_html=True,
+            f'<img src="data:image/gif;base64,{data_url}" alt="gif" width={display_size}>',
+            unsafe_allow_html=True,
         )
     else:
         col.markdown(
-        f'<img src="data:image/gif;base64,{data_url}" alt="gif" width={display_size}>',
-        unsafe_allow_html=True,
+            f'<img src="data:image/gif;base64,{data_url}" alt="gif" width={display_size}>',
+            unsafe_allow_html=True,
         )
 
 
 def download_file(file):
     # Don't download the file twice. (If possible, verify the download using the file length.)
-    if os.path.exists(EXTERNAL_DEPENDENCIES[file]["path"]+file): 
+    if os.path.exists(EXTERNAL_DEPENDENCIES[file]["path"]+file):
         if os.path.getsize(EXTERNAL_DEPENDENCIES[file]["path"]+file)+1000 > EXTERNAL_DEPENDENCIES[file]["size"]:
             return
-    
-    #st.write(EXTERNAL_DEPENDENCIES[file]["path"]+file)
-    
+
     # These are handles to two visual elements to animate.
     weights_warning, progress_bar = None, None
     try:
@@ -159,7 +166,7 @@ def download_file(file):
 
                     # We perform animation by overwriting the elements.
                     weights_warning.warning("Downloading %s... (%6.2f/%6.2f MB)" %
-                        (file, counter / MEGABYTES, length / MEGABYTES))
+                                            (file, counter / MEGABYTES, length / MEGABYTES))
                     progress_bar.progress(min(counter / length, 1.0))
 
     # Finally, we remove these visual elements by calling .empty().
@@ -168,6 +175,3 @@ def download_file(file):
             weights_warning.empty()
         if progress_bar is not None:
             progress_bar.empty()
-
-
-
