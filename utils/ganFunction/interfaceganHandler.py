@@ -3,7 +3,6 @@ from tqdm import tqdm
 import numpy as np
 import torch
 import cv2
-from keras.utils import get_file
 import io
 import bz2
 import requests 
