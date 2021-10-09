@@ -56,11 +56,6 @@ def writePageNode(operation):
             st.subheader('🎈Check more results in the following video.')
             st.video('https://youtu.be/uoftpl3Bj6w')
 
-        # gif = ['pose', 'age', 'gender', 'expression', 'eyeglasses', 'artifact']
-        # for i, col in enumerate(st.beta_columns(6)) :
-        #     open_gif(f'img/web/itfpage/{gif[i]}.gif', 150, col)
-
-
     if operation == '✨ Upload an image'  : upImageNode()
     if operation == '✨ Randomly generate': randomNode()
 
@@ -85,10 +80,10 @@ def upImageNode():
         smile = st.sidebar.slider('smile', -3.0, 3.0, 0.0, 0.5)
         eyeglasses = st.sidebar.slider('eyeglasses', -3.0, 3.0, 0.0, 0.5)
 
+
     @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
     def invert():
         if uploadImg: 
-
             with st.spinner('Aligning image...⏳'):
                 try: aligned, need_optimize = align_image(uploadImg)
                 except: 
@@ -127,12 +122,20 @@ def randomNode():
     numSamples = A1.slider('num of samples', 1, 5, 1, 1)
     seed = A2.slider('random seed', 1, 100, 25, 1)
 
-    @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
-    def random(seed):
-        if model_list[model] is not '':  
-           with st.spinner('Generating samples...⏳'): 
-                return itfTool.randomSamplig(model, latentSpaceType, numSamples)
-        else: return None, None
+    if sys.platform != 'darwin':
+        @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
+        def random(seed):
+            if model_list[model] is not '':  
+                with st.spinner('Generating samples...⏳'): 
+                        return itfTool.randomSamplig(model, latentSpaceType, numSamples)
+            else: return None, None
+    else:
+        def random(seed):
+            if model_list[model] is not '':  
+                with st.spinner('Generating samples...⏳'): 
+                        return itfTool.randomSamplig(model, latentSpaceType, numSamples)
+            else: return None, None
+    
 
 
     latent, origin_image = random(seed)
@@ -146,10 +149,14 @@ def randomNode():
             smile = st.slider('smile', -3.0, 3.0, 0.0, 0.5)
             eyeglasses = st.slider('eyeglasses', -3.0, 3.0, 0.0, 0.5)
 
+    if sys.platform != 'darwin':
         @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
         def manipulate():
             return itfTool.manipulate(latent, model, latentSpaceType, age, eyeglasses, gender, pose, smile)
-
+    else:
+        def manipulate():
+            return itfTool.manipulate(latent, model, latentSpaceType, age, eyeglasses, gender, pose, smile)
+    
         with st.spinner('Loading samples...⏳'):
             newImage = manipulate()
 

@@ -87,19 +87,33 @@ def editImage():
      
           
 
-     @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
-     def random():
-          with st.spinner('Generating samples...⏳'):
-               return hiTool.randomImage(num_samples, noise_seed, selected_model)
 
-     @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
-     def manipulate():
-          output_image = {}
-          with st.spinner('Loading samples...⏳'):
-               for i in range(len(model[selected_model])):
-                    output_image[model[selected_model][i]]= (hiTool.manipulate(model[selected_model][i]
-                                                                 , selected_model, distance, latent))
-          return output_image
+     if sys.platform != 'darwin':
+          @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
+          def random():
+               with st.spinner('Generating samples...⏳'):
+                    return hiTool.randomImage(num_samples, noise_seed, selected_model)
+
+          @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
+          def manipulate():
+               output_image = {}
+               with st.spinner('Loading samples...⏳'):
+                    for i in range(len(model[selected_model])):
+                         output_image[model[selected_model][i]]= (hiTool.manipulate(model[selected_model][i]
+                                                                      , selected_model, distance, latent))
+               return output_image
+     else:
+          def random():
+               with st.spinner('Generating samples...⏳'):
+                    return hiTool.randomImage(num_samples, noise_seed, selected_model)
+
+          def manipulate():
+               output_image = {}
+               with st.spinner('Loading samples...⏳'):
+                    for i in range(len(model[selected_model])):
+                         output_image[model[selected_model][i]]= (hiTool.manipulate(model[selected_model][i]
+                                                                      , selected_model, distance, latent))
+               return output_image
 
 
      output = st.empty()

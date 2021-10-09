@@ -26,7 +26,6 @@ PAGES = {
     'HiGAN': src.pages.higan_page
 }
 
-
 def main():
 
     with st.sidebar:

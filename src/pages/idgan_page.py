@@ -234,10 +234,14 @@ def Manipulation():
         with st.spinner('inverting source image...⏳'):
             idvTool.align_invert(src_file_path)
 
-    @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
-    def manipulate():
-        return idvTool.manipulation(age, gender, pose, eyeglasses, expression)
-
+    if sys.platform != 'darwin':
+        @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
+        def manipulate():
+            return idvTool.manipulation(age, gender, pose, eyeglasses, expression)
+    else:
+        def manipulate():
+            return idvTool.manipulation(age, gender, pose, eyeglasses, expression)
+    
     # Show the Output image
     if idvTool.latentCode is not None:
         # Show feature in sidebar
@@ -293,13 +297,25 @@ def cropHelper(context_img, target_img, crop_width, crop_height):
 def build_idvTool():
     progressbar = st.progress(1)
 
-    with st.spinner('⏳ ...building In-Domain GAN generator'):
-        idvTool.build_generator()
-        progressbar.progress(50)
+    try:
+        with st.spinner('⏳ ...building In-Domain GAN generator'):
+            idvTool.build_generator()
+            progressbar.progress(50)
+    except:
+        with st.spinner('⏳ Something going wrong when building In-Domain GAN generator'):
+            time.sleep(1)
 
-    with st.spinner('⏳ ...building In-Domain GAN inverter'):
-        idvTool.build_inverter()
-        progressbar.progress(100)
+    try:
+        with st.spinner('⏳ ...building In-Domain GAN inverter'):
+            idvTool.build_inverter()
+            progressbar.progress(100)
+    except:
+        with st.spinner('⏳ Something going wrong when ⏳ ...building In-Domain GAN inverter'):
+            progressbar.progress(100)
+            time.sleep(1)
+            
+            
+    
     time.sleep(0.5)
 
     progressbar.empty()
