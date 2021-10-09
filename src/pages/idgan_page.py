@@ -1,13 +1,10 @@
 import base64
-import io
 import os
 import sys
 import time
 
 import cv2
-import numpy as np
 import streamlit as st
-import torch
 from PIL import Image
 
 if sys.platform == 'darwin':

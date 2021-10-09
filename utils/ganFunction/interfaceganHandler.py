@@ -1,27 +1,20 @@
 import os
-from tqdm import tqdm
-import numpy as np
-import torch
-import cv2
-import io
-import bz2
-import requests 
-import dlib
-from PIL import Image
-import scipy.ndimage
-import gc
-import streamlit as st
 
+import dlib
+import numpy as np
+import streamlit as st
+import torch
 from gan.interfacegan.InterFaceGAN.models.model_settings import MODEL_POOL
 from gan.interfacegan.InterFaceGAN.models.pggan_generator import PGGANGenerator
-from gan.interfacegan.InterFaceGAN.models.stylegan_generator import StyleGANGenerator
-from gan.interfacegan.latent_encoder.models.latent_optimizer import LatentOptimizer
-from gan.interfacegan.latent_encoder.models.image_to_latent import ImageToLatent
+from gan.interfacegan.InterFaceGAN.models.stylegan_generator import \
+    StyleGANGenerator
+from gan.interfacegan.latent_encoder.models.latent_optimizer import \
+    LatentOptimizer
 from gan.interfacegan.latent_encoder.models.losses import LatentLoss
 from gan.interfacegan.latent_encoder.utilities.hooks import GeneratedImageHook
-from gan.interfacegan.latent_encoder.utilities.files import validate_path
-from gan.interfacegan.latent_encoder.utilities.images import save_image
 from gan.interfacegan.latent_encoder.utilities.images import load_images
+from tqdm import tqdm
+
 
 class itfgan_webObject:
 
@@ -74,7 +67,7 @@ class itfgan_webObject:
 
       default_control_features = ['age','eyeglasses','gender','pose','smile']
       boundaries = {}
-      for i, attr_name in enumerate(default_control_features):
+      for attr_name in default_control_features:
           boundary_name = f'{model_name}_{attr_name}'
           if model_name == 'stylegan_ffhq' or model_name == 'stylegan_celebahq' :
             if latentSpaceType == 'W' or latentSpaceType == 'WP': 
@@ -96,7 +89,7 @@ class itfgan_webObject:
 
       
       new_codes = latentCode.copy()
-      for i, attr_name in enumerate(default_control_features):
+      for attr_name in default_control_features:
           new_codes += boundaries[attr_name] * eval(attr_name)
       
       newImage = model.easy_synthesize(new_codes, **kwargs)['image']
@@ -109,8 +102,6 @@ class itfgan_webObject:
 
             for param in latent_optimizer.parameters():
                 param.requires_grad_(False)
-
-            generated_image_hook = GeneratedImageHook(latent_optimizer.post_synthesis_processing, 1)
 
             reference_image = load_images([input_image])
             reference_image = torch.from_numpy(reference_image).cuda()
@@ -136,6 +127,7 @@ class itfgan_webObject:
 
                     optimizer.step()
                     progress_bar.set_description("Step: {}, Loss: {}".format(step, loss))
+                    
             stprogress_bar.empty()
             optimized_dlatents = latents_to_be_optimized.detach().cpu().numpy()
             return optimized_dlatents

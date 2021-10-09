@@ -1,10 +1,6 @@
-import io
-import os
 import sys
 import time
-from tkinter import filedialog
 
-import numpy as np
 import streamlit as st
 from PIL import Image
 
@@ -153,25 +149,25 @@ def randomNode():
             smile = st.slider('smile', -3.0, 3.0, 0.0, 0.5)
             eyeglasses = st.slider('eyeglasses', -3.0, 3.0, 0.0, 0.5)
 
-    if sys.platform != 'darwin':
-        @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
-        def manipulate():
-            return itfTool.manipulate(latent, model, latentSpaceType, age, eyeglasses, gender, pose, smile)
-    else:
-        def manipulate():
-            return itfTool.manipulate(latent, model, latentSpaceType, age, eyeglasses, gender, pose, smile)
-    
+        if sys.platform != 'darwin':
+            @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
+            def manipulate():
+                return itfTool.manipulate(latent, model, latentSpaceType, age, eyeglasses, gender, pose, smile)
+        else:
+            def manipulate():
+                return itfTool.manipulate(latent, model, latentSpaceType, age, eyeglasses, gender, pose, smile)
+        
 
 
-    with st.spinner('Loading samples...⏳'):
-        newImage = manipulate()
+        with st.spinner('Loading samples...⏳'):
+            newImage = manipulate()
 
-    st.subheader('Step 2: Play with the features in the sidebar')
-    B1, B2 = st.beta_columns((1,1))
-    
-    for i, o in zip(origin_image, newImage): 
-            B1.image(i, 'Input', use_column_width=True)
-            B2.image(o, 'Output', use_column_width=True)
+        st.subheader('Step 2: Play with the features in the sidebar')
+        B1, B2 = st.beta_columns((1,1))
+        
+        for i, o in zip(origin_image, newImage): 
+                B1.image(i, 'Input', use_column_width=True)
+                B2.image(o, 'Output', use_column_width=True)
 
 
 def build_itfTool():

@@ -1,21 +1,18 @@
-import os
-from tqdm import tqdm
-import numpy as np
-import torch
-import cv2
-import io
 import bz2
-import requests 
-import dlib
-from PIL import Image
-import scipy.ndimage
 import gc
+import os
 
-from gan.idinvert.utils.inverter import StyleGANInverter
-from gan.idinvert.utils.visualizer import load_image, resize_image
+import cv2
+import dlib
+import numpy as np
+import requests
+import scipy.ndimage
+import torch
 from gan.idinvert.models.helper import build_generator
-from gan.idinvert.utils.editor import interpolate
-
+from gan.idinvert.utils.inverter import StyleGANInverter
+from gan.idinvert.utils.visualizer import resize_image
+from PIL import Image
+from tqdm import tqdm
 
 LANDMARK_MODEL_NAME = 'shape_predictor_68_face_landmarks.dat'
 LANDMARK_MODEL_PATH = os.path.abspath('gan/idinvert/models/pretrain/shape_predictor_68_face_landmarks.dat')
@@ -58,7 +55,6 @@ class indinvert_webObject:
     self.cleanCache()
 
     inverter = self.inverter[self.model_name]
-    generator = self.generator[self.model_name]
 
     image_size = inverter.G.resolution
 
@@ -71,7 +67,6 @@ class indinvert_webObject:
           context_idx = context_batch_idx + it
           if context_idx >= 1:
             continue
-          row_idx = target_idx * 1 + context_idx
           context_image = resize_image(context_img,(image_size, image_size))
           context_images.append(context_image)
 
@@ -84,15 +79,13 @@ class indinvert_webObject:
                                                     num_viz=5)
         for key, values in viz_results.items():
           context_idx = context_batch_idx + key
-          row_idx = target_idx * 1 + context_idx
-          for viz_idx, viz_img in enumerate(values):
+          for viz_img in values:
             cropped_img = viz_img
         latent_codes.append(code)
 
       save_path = 'img/indomain_output/result/temp.png'
       cv2.imwrite(save_path,cropped_img)
       result_img = Image.open(save_path)
-      # os.remove(save_path)
       return result_img
 
 
