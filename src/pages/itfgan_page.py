@@ -161,15 +161,17 @@ def randomNode():
         def manipulate():
             return itfTool.manipulate(latent, model, latentSpaceType, age, eyeglasses, gender, pose, smile)
     
-        with st.spinner('Loading samples...⏳'):
-            newImage = manipulate()
 
-        st.subheader('Step 2: Play with the features in the sidebar')
-        B1, B2 = st.beta_columns((1,1))
-        
-        for i, o in zip(origin_image, newImage): 
-                B1.image(i, 'Input', use_column_width=True)
-                B2.image(o, 'Output', use_column_width=True)
+
+    with st.spinner('Loading samples...⏳'):
+        newImage = manipulate()
+
+    st.subheader('Step 2: Play with the features in the sidebar')
+    B1, B2 = st.beta_columns((1,1))
+    
+    for i, o in zip(origin_image, newImage): 
+            B1.image(i, 'Input', use_column_width=True)
+            B2.image(o, 'Output', use_column_width=True)
 
 
 def build_itfTool():
