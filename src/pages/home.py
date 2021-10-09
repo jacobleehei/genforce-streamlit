@@ -1,13 +1,14 @@
-import streamlit as st
 import os
 import sys
 
+import streamlit as st
+
 if sys.platform == 'darwin':
     sys.path.append('utils')
-    import webFunction
     import fileDetail
+    import webFunction
 else:
-    from utils import webFunction, fileDetail
+    from utils import fileDetail, webFunction
 
 
 def write():

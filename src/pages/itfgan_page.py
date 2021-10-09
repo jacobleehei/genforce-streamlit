@@ -1,18 +1,22 @@
-import streamlit as st
+import io
+import os
+import sys
+import time
 from tkinter import filedialog
-from PIL import Image
-import os, time, io, sys
+
 import numpy as np
+import streamlit as st
+from PIL import Image
 
 if sys.platform == 'darwin':
     sys.path.append('utils')
     import ganFunction.interfaceganHandler as itf
-    from webFunction import image_cropping, open_gif
     from gan.interfacegan.face_align.align_images import align_image
+    from webFunction import image_cropping, open_gif
 else:
     import utils.ganFunction.interfaceganHandler as itf
-    from utils.webFunction import image_cropping, open_gif
     from gan.interfacegan.face_align.align_images import align_image
+    from utils.webFunction import image_cropping, open_gif
 
 itfTool = itf.itfgan_webObject()
 

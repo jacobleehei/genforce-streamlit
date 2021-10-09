@@ -1,20 +1,18 @@
 # python 3.7
 """Manipulates images from latent space."""
 
-import os.path
 import argparse
+import os.path
+
 import numpy as np
 from tqdm import tqdm
 
 from models.helper import build_generator
+from utils.editor import (get_layerwise_manipulation_strength, manipulate,
+                          parse_boundary_list)
 from utils.logger import setup_logger
-from utils.editor import parse_boundary_list
-from utils.editor import get_layerwise_manipulation_strength
-from utils.editor import manipulate
-from utils.visualizer import HtmlPageVisualizer
-from utils.visualizer import fuse_images
-from utils.visualizer import VideoWriter
-from utils.visualizer import save_image
+from utils.visualizer import (HtmlPageVisualizer, VideoWriter, fuse_images,
+                              save_image)
 
 _ATTRIBUTE_LIST_DESCRIPTION = '''
 Attribute list desctipiton:

@@ -1,5 +1,8 @@
+import os
+import sys
+
+import cv2
 import streamlit as st
-import cv2, os, sys
 from PIL import Image
 
 if sys.platform == 'darwin':

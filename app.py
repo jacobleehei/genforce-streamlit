@@ -1,5 +1,6 @@
-import streamlit as st
 import sys
+
+import streamlit as st
 
 st.set_page_config(
         page_title="GenForce",
@@ -14,9 +15,9 @@ if sys.platform == 'darwin':
 else:
     from utils.webFunction import write_page
 
+import src.pages.higan_page
 import src.pages.home
 import src.pages.idgan_page
-import src.pages.higan_page
 import src.pages.itfgan_page
 
 PAGES = {

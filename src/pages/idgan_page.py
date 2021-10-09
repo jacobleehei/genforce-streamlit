@@ -1,21 +1,22 @@
-import streamlit as st
-from PIL import Image
-import numpy as np
-import cv2
-import os
-import time
 import base64
 import io
-import torch
+import os
 import sys
+import time
+
+import cv2
+import numpy as np
+import streamlit as st
+import torch
+from PIL import Image
 
 if sys.platform == 'darwin':
     sys.path.append('utils')
-    import webFunction as web
     import ganFunction.idinvertHandler as idv
+    import webFunction as web
 else:
-    from utils import webFunction as web
     import utils.ganFunction.idinvertHandler as idv
+    from utils import webFunction as web
 
 
 idvTool = idv.indinvert_webObject()
