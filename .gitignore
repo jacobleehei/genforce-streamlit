@@ -1,20 +1,7 @@
-.DS_Store 
+*.DS_Store 
 ._.DS_Store
 .___pycache__
-._face_align
-._latent_encoder
-._HiGAN_page.py
-._InDomainGAN_page.py
-._InterFaceGAN.py
-.___pycache__
-._home.py
-._resouces
-._utils
-._Web
-._aligned_file
-._interface_out
-._latent
-._temp
+._vscode
 *.pth
 *.pyc
 
