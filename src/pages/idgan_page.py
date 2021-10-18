@@ -239,7 +239,7 @@ def Manipulation():
     else:
         def manipulate():
             return idvTool.manipulation(age, gender, pose, eyeglasses, expression)
-    
+
     # Show the Output image
     if idvTool.latentCode is not None:
         # Show feature in sidebar
@@ -311,9 +311,7 @@ def build_idvTool():
         with st.spinner('⏳ Something going wrong when ⏳ ...building In-Domain GAN inverter'):
             progressbar.progress(100)
             time.sleep(1)
-            
-            
-    
+
     time.sleep(0.5)
 
     progressbar.empty()
