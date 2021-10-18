@@ -340,7 +340,6 @@ def manipulate(latent_codes,
   l = np.linspace(start_distance, end_distance, step).reshape(
       [step if axis == 1 else 1 for axis in range(x.ndim)])
   results = np.tile(x, [step if axis == 1 else 1 for axis in range(x.ndim)])
-  print(results.shape)
   is_manipulatable = np.zeros(results.shape, dtype=bool)
   is_manipulatable[:, :, layer_indices] = True
   results = np.where(is_manipulatable, x + l * b, results)

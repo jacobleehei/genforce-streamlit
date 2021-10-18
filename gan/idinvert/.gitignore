@@ -1,8 +1,0 @@
-__pycache__/
-*.py[cod]
-
-*.jpg
-*.png
-*.jpeg
-*.log
-/results/

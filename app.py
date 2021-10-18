@@ -1,40 +1,33 @@
-import sys
-
 import streamlit as st
 
+import pages.higan_page as higan_page
+import pages.itfgan_page as itfgan_page
+import pages.home as home
+
+from utils.helper import write_page
+
 st.set_page_config(
-        page_title="GenForce",
-        page_icon=":dizzy:",
-        layout="wide",
-        initial_sidebar_state="expanded",
+    page_title="GenForce",
+    page_icon=":dizzy:",
+    layout="wide",
+    initial_sidebar_state="expanded",
 )
 
-if sys.platform == 'darwin':
-    sys.path.append('utils')
-    from webFunction import write_page  
-else:
-    from utils.webFunction import write_page
-
-import src.pages.higan_page
-import src.pages.home
-import src.pages.idgan_page
-import src.pages.itfgan_page
 
 PAGES = {
-    'Home': src.pages.home,
-    'InterFaceGAN': src.pages.itfgan_page,
-    'In-DomainGAN': src.pages.idgan_page,
-    'HiGAN': src.pages.higan_page
+    'Home': home,
+    'InterFaceGAN': itfgan_page,
+    'HiGAN': higan_page
 }
+
 
 def main():
 
     with st.sidebar:
         # update message
         st.info("""
-            ⭐ **Update**: Fix import bug.
-            """
-            )
+            ⭐ **Update**: New version for Streamlit Cloud.
+            """)
 
         # navigation
         st.title('Navigation')
@@ -46,4 +39,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
