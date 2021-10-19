@@ -3,7 +3,7 @@ import time
 import streamlit as st
 
 import utils.gan_handler.itfgan as itf
-from utils.helper import  open_gif
+from utils.helper import open_gif
 
 itfTool = itf.itfgan_webObject()
 
@@ -27,8 +27,6 @@ def write():
         "[![GitHub](https://img.shields.io/github/stars/genforce/interfacegan?style=social&label=Code&maxAge=2592000)](https://github.com/genforce/interfacegan)&nbsp;&nbsp;"
     )
 
-    if itfTool.model['stylegan_ffhq'] is None:
-        build_itfTool()
     operation = st.selectbox(
         'Please choose the operation you want', list(itfNode), index=0)
     write_page_node(operation)
@@ -57,10 +55,8 @@ def write_page_node(operation):
 
 def random_image_edit():
     model_list = {
-        'click here': '',
         'stylegan_ffhq': ['Z', 'W', 'WP'],
-        'stylegan_celebahq': ['Z', 'W', 'WP'],
-        'pggan_celebahq': ['Z']
+        'click here': '',
     }
 
     st.subheader('Step 1: Set up the parameters')
@@ -69,38 +65,39 @@ def random_image_edit():
     latentSpaceType = A2.selectbox(
         'lantent space type', list(model_list[model]))
 
-    numSamples = A1.slider('num of samples', 1, 5, 1, 1)
-    seed = A2.slider('random seed', 1, 100, 25, 1)
+    seed = st.slider('random seed', 1, 100, 25, 1)
 
     @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
     def random(seed):
         if model_list[model] is not '':
             with st.spinner('Generating samples...⏳'):
-                return itfTool.randomSamplig(model, latentSpaceType, numSamples)
+                return itfTool.randomSamplig(model, latentSpaceType, 1)
         else:
             return None, None
 
     latent, origin_image = random(seed)
-
+    newImage = origin_image
     if model_list[model] is not '':
-        with st.sidebar:
+        with st.sidebar.form(key='feature'):
             st.subheader('👱🏼 Feature')
+            submit = st.form_submit_button(label='submit🎉')
             age = st.slider('age', -3.0, 3.0, 0.0, 0.5)
             gender = st.slider('gender', -3.0, 3.0, 0.0, 0.5)
             pose = st.slider('pose', -3.0, 3.0, 0.0, 0.5)
             smile = st.slider('smile', -3.0, 3.0, 0.0, 0.5)
             eyeglasses = st.slider('eyeglasses', -3.0, 3.0, 0.0, 0.5)
 
-        @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
-        def manipulate():
-            return itfTool.manipulate(latent, model, latentSpaceType, age, eyeglasses, gender, pose, smile)
+            if submit:
+                @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
+                def manipulate():
+                    return itfTool.manipulate(latent, model, latentSpaceType, age, eyeglasses, gender, pose, smile)
 
-        with st.spinner('Loading samples...⏳'):
-            newImage = manipulate()
+                with st.spinner('Loading samples...⏳'):
+                    newImage = manipulate()
 
         st.subheader('Step 2: Play with the features in the sidebar')
         B1, B2 = st.beta_columns((1, 1))
-
+        
         for i, o in zip(origin_image, newImage):
             B1.image(i, 'Input', use_column_width=True)
             B2.image(o, 'Output', use_column_width=True)

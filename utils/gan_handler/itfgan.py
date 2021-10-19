@@ -11,29 +11,10 @@ from gan.interfacegan.models.stylegan_generator import \
 class itfgan_webObject:
 
     def __init__(self):
-        self.model = {
-            'stylegan_ffhq': None,
-            'stylegan_celebahq': None,
-            'pggan_celebahq': None
-        }
-        self.synthesizer = None
-
-    def build_generatorS(self):
-        self.cleanCache()
-        self.model['stylegan_ffhq'] = StyleGANGenerator('stylegan_ffhq')
-        self.model['stylegan_celebahq'] = StyleGANGenerator(
-            'stylegan_celebahq')
-        self.synthesizer = StyleGANGenerator("stylegan_ffhq").model.synthesis
-
-    def build_generatorP(self):
-        self.cleanCache()
-        self.model['pggan_celebahq'] = PGGANGenerator('pggan_celebahq')
-
-    def cleanCache(self):
-        torch.cuda.empty_cache()
+        self.model = {'stylegan_ffhq': StyleGANGenerator('stylegan_ffhq')}
+        self.synthesizer = self.model['stylegan_ffhq'].model.synthesis
 
     def randomSamplig(self, model_name, latentSpaceType, num):
-        self.cleanCache()
         for name in self.model:
             if model_name is name:
                 generator = self.model[name]
@@ -57,7 +38,6 @@ class itfgan_webObject:
                    age, eyeglasses, gender, pose, smile,
                    check_if_upload=False
                    ):
-        self.cleanCache()
         for name in self.model:
             if model_name is name:
                 model = self.model[name]
@@ -97,4 +77,3 @@ class itfgan_webObject:
 
         newImage = model.easy_synthesize(new_codes, **kwargs)['image']
         return newImage
-
