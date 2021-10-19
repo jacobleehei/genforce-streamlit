@@ -26,6 +26,7 @@ colorama==0.4.4
 cycler==0.10.0
 decorator==4.4.2
 defusedxml==0.6.0
+cmake
 dlib==19.22.1
 entrypoints==0.3
 enum-compat==0.0.3
