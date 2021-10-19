@@ -14,8 +14,8 @@ def write():
                 st.error('something goes wrong:(')
                 time.sleep(1)
 
-    icon_path = "img/web/icon.gif"
-    helper.open_gif(icon_path, 400)
+    # icon_path = "img/web/icon.gif"
+    # helper.open_gif(icon_path, 400)
 
     st.title('Generative Force')
 
