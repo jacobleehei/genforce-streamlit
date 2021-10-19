@@ -24,7 +24,7 @@ chardet==4.0.0
 click==7.1.2
 colorama==0.4.4
 cycler==0.10.0
-cmake==3.19.6
+cmake==3.18.4
 decorator==4.4.2
 defusedxml==0.6.0
 dlib==19.22.1
