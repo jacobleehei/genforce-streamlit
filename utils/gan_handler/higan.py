@@ -13,20 +13,11 @@ w1k_code = np.load(os.path.abspath('utils/gan_handler/order_w.npy'))
 class higan_webOject:
 
     def __init__(self):
-        self.inverter = None
-        self.generator = None
         self.model = {
-            'stylegan_bedroom': None,
-            'stylegan_livingroom': None,
-            'stylegan_churchoutdoor': None,
-            'stylegan_tower': None,
-            'stylegan_kitchen': None,
-            'stylegan_bridge': None,
+            'stylegan_bedroom': build_model('stylegan_bedroom'),
+            'stylegan_livingroom': build_model('stylegan_livingroom'),
+            'stylegan_tower': build_model('stylegan_tower'),
         }
-
-    def build_generator(self, model_name):
-        if self.model[model_name] is None:
-            self.model[model_name] = build_model(model_name)
 
     def randomImage(self, num_samples, noise_seed, model_name):
         generator = self.model[model_name]

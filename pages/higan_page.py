@@ -1,9 +1,4 @@
-import os
-import sys
-
-import cv2
 import streamlit as st
-from PIL import Image
 
 import utils.gan_handler.higan as higan
 from utils.helper import download_button, open_gif
@@ -14,11 +9,7 @@ model = {
     'click here': [''],
     'stylegan_bedroom': ['view', 'wood', 'cluttered_space', 'indoor_lighting', 'scary', 'glossy', 'dirt', 'carpet'],
     'stylegan_livingroom': ['carpet', 'cluttered_space', 'dirt', 'glossy', 'indoor_lighting', 'wood'],
-    'stylegan2_church': ['clouds', 'sunny', 'vegetation'],
-    'stylegan_churchoutdoor': ['brick', 'clouds', 'foliage', 'grass', 'natural_light', 'sunny', 'touring', 'trees', 'vegetation', 'vertical_components'],
     'stylegan_tower': ['brick', 'clouds', 'foliage', 'grass', 'sunny', 'trees', 'vegetation', 'vertical_components'],
-    'stylegan_kitchen': ['cluttered_space', 'eating', 'glass', 'glossy', 'indoor_lighting', 'metal', 'wood'],
-    'stylegan_bridge': ['clouds', 'far-away_horizon', 'grass', 'natural_light', 'sunny', 'trees', 'vegetation'],
 }
 
 
@@ -57,7 +48,6 @@ def write_node(operation):
         Identifying such a set of manipulatable latent variation factors facilitates semantic scene manipulation.
         """, unsafe_allow_html=True)
         with st.spinner('Loading...☕'):
-            open_gif(f'img/web/hipage/result.gif')
             st.subheader(
                 'Check more results of various scenes in the following video.')
             st.video('https://youtu.be/X5yWu2Jwjpg')
@@ -82,14 +72,12 @@ def rand_image_editing():
     distance = st.slider('distance', -5.0, 5.0, 0.0, 1.0)
     if selected_model == 'stylegan2_church':
         distance *= 2
-    A1, A2 = st.beta_columns((1, 1))
-    num_samples = A1.slider('num_samples', 1, 5, 1, 1)
-    noise_seed = A2.slider('noise_seed', 0, 100, 10, 1)
+    noise_seed = st.slider('noise_seed', 0, 100, 10, 1)
 
     @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
     def random():
         with st.spinner('Generating samples...⏳'):
-            return hiTool.randomImage(num_samples, noise_seed, selected_model)
+            return hiTool.randomImage(1, noise_seed, selected_model)
 
     @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
     def manipulate():
