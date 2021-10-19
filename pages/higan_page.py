@@ -1,7 +1,7 @@
 import streamlit as st
 
 import utils.gan_handler.higan as higan
-from utils.helper import download_button, open_gif
+from utils.helper import download_button
 
 hiTool = higan.higan_webOject()
 

@@ -6,7 +6,6 @@ import uuid
 import re
 import urllib
 import os
-import tkinter
 from PIL import Image
 
 from utils.file_detail import EXTERNAL_DEPENDENCIES
@@ -109,30 +108,6 @@ def image_cropping(input_image, color='#F63366', ratio=(1, 1)):
     input_image.thumbnail((300, 300))
     return input_image
 
-
-def open_gif(path, display_size=tkinter.Tk().winfo_screenwidth()/1.6, col=None):
-    '''
-    This function will show gif in streamlit.
-    path: the path of gif
-    display_size: the size to be display (default: screen width/1.6)
-    col: if you are using streamlit beta_column, pass through this parameter
-    '''
-
-    file_ = open(path, "rb")
-    contents = file_.read()
-    data_url = base64.b64encode(contents).decode("utf-8")
-    file_.close()
-
-    if col is None:
-        st.markdown(
-            f'<img src="data:image/gif;base64,{data_url}" alt="gif" width={display_size}>',
-            unsafe_allow_html=True,
-        )
-    else:
-        col.markdown(
-            f'<img src="data:image/gif;base64,{data_url}" alt="gif" width={display_size}>',
-            unsafe_allow_html=True,
-        )
 
 
 def download_file(file):
