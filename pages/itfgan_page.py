@@ -3,7 +3,6 @@ import time
 import streamlit as st
 
 import utils.gan_handler.itfgan as itf
-from utils.helper import open_gif
 
 itfTool = itf.itfgan_webObject()
 
@@ -44,7 +43,6 @@ def write_page_node(operation):
         ## Example: Manipulate the attributes with PGGAN
         """, unsafe_allow_html=True)
         with st.spinner('Loading...☕'):
-            open_gif(f'img/web/itfpage/example.gif')
             st.markdown('<br>', unsafe_allow_html=True)
             st.subheader('🎈Check more results in the following video.')
             st.video('https://youtu.be/uoftpl3Bj6w')
