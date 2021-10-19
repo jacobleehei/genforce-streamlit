@@ -5,8 +5,6 @@ torch==1.8.0
 numpy==1.19.2
 Keras==2.4.3
 requests==2.25.1
-cmake==3.18.4.post1
-dlib==19.21.1
 scipy==1.5.4
 tqdm==4.59.0
 zipp==3.4.1
