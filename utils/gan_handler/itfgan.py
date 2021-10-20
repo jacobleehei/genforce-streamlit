@@ -8,11 +8,16 @@ from gan.interfacegan.models.stylegan_generator import \
     StyleGANGenerator
 
 
-class itfgan_webObject:
+class gan:
 
     def __init__(self):
-        self.model = {'stylegan_ffhq': StyleGANGenerator('stylegan_ffhq')}
-        self.synthesizer = self.model['stylegan_ffhq'].model.synthesis
+        self.model = {'stylegan_ffhq': None}
+        self.synthesizer = None
+
+    def build(self):        
+        if self.model['stylegan_ffhq'] == None:
+            self.model = {'stylegan_ffhq': StyleGANGenerator('stylegan_ffhq')}
+            self.synthesizer = self.model['stylegan_ffhq'].model.synthesis
 
     def randomSamplig(self, model_name, latentSpaceType, num):
         for name in self.model:

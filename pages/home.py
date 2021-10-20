@@ -3,7 +3,6 @@ import streamlit as st
 
 from utils import file_detail, helper
 
-
 def write():
     # Download all data files if they aren't already in the working directory.
     with st.spinner('Just a sec, come back later...☕'):
@@ -14,8 +13,7 @@ def write():
                 st.error('something goes wrong:(')
                 time.sleep(1)
 
-    # icon_path = "img/web/icon.gif"
-    # helper.open_gif(icon_path, 400)
+    helper.open_gif("img/web/icon.gif", 400)
 
     st.title('Generative Force')
 

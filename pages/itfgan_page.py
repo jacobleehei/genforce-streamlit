@@ -4,8 +4,7 @@ import streamlit as st
 
 import utils.gan_handler.itfgan as itf
 
-itfTool = itf.itfgan_webObject()
-
+itf_tool = itf.gan()
 
 def write():
 
@@ -28,6 +27,7 @@ def write():
 
     operation = st.selectbox(
         'Please choose the operation you want', list(itfNode), index=0)
+    itf_tool.build()
     write_page_node(operation)
 
 
@@ -69,7 +69,7 @@ def random_image_edit():
     def random(seed):
         if model_list[model] is not '':
             with st.spinner('Generating samples...⏳'):
-                return itfTool.randomSamplig(model, latentSpaceType, 1)
+                return itf_tool.randomSamplig(model, latentSpaceType, 1)
         else:
             return None, None
 
@@ -88,7 +88,7 @@ def random_image_edit():
             if submit:
                 @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
                 def manipulate():
-                    return itfTool.manipulate(latent, model, latentSpaceType, age, eyeglasses, gender, pose, smile)
+                    return itf_tool.manipulate(latent, model, latentSpaceType, age, eyeglasses, gender, pose, smile)
 
                 with st.spinner('Loading samples...⏳'):
                     newImage = manipulate()
@@ -105,11 +105,11 @@ def build_itfTool():
     progressbar = st.progress(1)
 
     with st.spinner('⏳ ...building generator for StyleGAN'):
-        itfTool.build_generatorS()
+        itf_tool.build_generatorS()
         progressbar.progress(50)
 
     with st.spinner('⏳ ...building generator for PGGAN'):
-        itfTool.build_generatorP()
+        itf_tool.build_generatorP()
         progressbar.progress(100)
 
     time.sleep(0.5)

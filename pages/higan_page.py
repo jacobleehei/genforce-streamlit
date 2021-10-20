@@ -3,7 +3,7 @@ import streamlit as st
 import utils.gan_handler.higan as higan
 from utils.helper import download_button
 
-hiTool = higan.higan_webOject()
+hi_tool = higan.gan()
 
 model = {
     'click here': [''],
@@ -11,7 +11,6 @@ model = {
     'stylegan_livingroom': ['carpet', 'cluttered_space', 'dirt', 'glossy', 'indoor_lighting', 'wood'],
     'stylegan_tower': ['brick', 'clouds', 'foliage', 'grass', 'sunny', 'trees', 'vegetation', 'vertical_components'],
 }
-
 
 def write():
 
@@ -32,6 +31,7 @@ def write():
 
     operation = st.selectbox(
         'Please choose the operation you want', list(hiNode), index=0)
+    hi_tool.build()
     write_node(operation)
 
 
@@ -64,7 +64,7 @@ def rand_image_editing():
 
     if selected_model != 'click here':
         with st.spinner('Loading ' + selected_model + ' model...⏳'):
-            hiTool.build_generator(selected_model)
+            hi_tool.build_generator(selected_model)
 
     st.subheader('Step2: Play with the parameters🔨')
     selected_feature = st.multiselect('select a feature to edit!', list(
@@ -77,14 +77,14 @@ def rand_image_editing():
     @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
     def random():
         with st.spinner('Generating samples...⏳'):
-            return hiTool.randomImage(1, noise_seed, selected_model)
+            return hi_tool.randomImage(1, noise_seed, selected_model)
 
     @st.cache(suppress_st_warning=True, show_spinner=False, allow_output_mutation=True)
     def manipulate():
         output_image = {}
         with st.spinner('Loading samples...⏳'):
             for i in range(len(model[selected_model])):
-                output_image[model[selected_model][i]] = (hiTool.manipulate(
+                output_image[model[selected_model][i]] = (hi_tool.manipulate(
                     model[selected_model][i], selected_model, distance, latent))
             return output_image
 
