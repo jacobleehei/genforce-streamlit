@@ -6,7 +6,6 @@ import uuid
 import re
 import urllib
 import os
-import tkinter
 from PIL import Image
 
 from utils.file_detail import EXTERNAL_DEPENDENCIES
@@ -81,7 +80,7 @@ def download_button(input_file, button_text):
     st.markdown(dl_link, unsafe_allow_html=True)
 
 
-def open_gif(path, display_size=tkinter.Tk().winfo_screenwidth()/1.6, col=None):
+def open_gif(path, display_size=200, col=None):
     '''
     This function will show gif in streamlit.
     path: the path of gif

@@ -1,5 +1,4 @@
 streamlit==1.0.0
-tk==0.1.0
 IPython==7.16.1
 Pillow==8.3.2
 torch==1.8.0
